@@ -5,8 +5,8 @@
         <title>1st project</title>
     </head>
     <body>
-        <script>
-            document.write("Hello");
-        </script>
+        <?php
+            echo "Hello";
+        ?>
     </body>
 </html>
