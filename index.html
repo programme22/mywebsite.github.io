@@ -3,10 +3,17 @@
     <head>
         <meta charset="utf-8">
         <title>1st project</title>
+        <style>
+            
+        </style>
     </head>
     <body>
+        <div id="display"></div>
        <script>
-           document.write("Hello");
+           var div=document.getElementById("display");
+           for(var i=0;i<10;i++){
+               div.innerHTML=i;
+           }
        </script>
     </body>
 </html>
