@@ -8,11 +8,10 @@
         </style>
     </head>
     <body>
-        <div id="display"></div>
+        var div='<div></div>';
        <script>
-           var div=document.getElementById("display");
            for(var i=0;i<10;i++){
-               div.innerHTML=i;
+               div+=i; 
            }
        </script>
     </body>
