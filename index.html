@@ -9,10 +9,21 @@
 				padding:0;
 				background:cyan;
 			}
-			
+			.basePanel{
+				display:flex;
+				flex-wrap:wrap;
+				background:red;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>Το πρώτο μου project</h1>
+		<div class="basePanel" id="base"></div>
+		<script>
+			var base=document.getElementById("base");
+			var template=`<div>i</div>`;
+			for(var i=0;i<5;i++){
+				base+=template;
+			}
+		</script>
 	</body>
 </html>
