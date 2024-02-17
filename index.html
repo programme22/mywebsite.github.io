@@ -32,7 +32,8 @@
 		<script>
 			var base=document.getElementById("base");
 			var template=`<div class="tempDiv">i</div>`;
-			for(var i=0;i<5;i++){
+			var window=window.innerWidth;
+			for(var i=0;i<window;i++){
 				base.innerHTML+=template;
 			}
 		</script>
