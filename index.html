@@ -15,12 +15,14 @@
 				background:transparent;
 				height:50%;
 				width:100%;
+				justify-content:space-between;
 			}
 			.tempDiv{
 				display:flex;
 				flex-direction:column;
 				height:100%;
 				width:20%;
+				border:1px solid black;
 			}
 		</style>
 	</head>
@@ -28,7 +30,7 @@
 		<div class="basePanel" id="base"></div>
 		<script>
 			var base=document.getElementById("base");
-			var template=`<div style="border:1px solid black;width:20%;height:100%;">i</div>`;
+			var template=`<div style="">i</div>`;
 			for(var i=0;i<5;i++){
 				base.innerHTML+=template;
 			}
