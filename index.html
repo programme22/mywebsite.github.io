@@ -23,6 +23,7 @@
 				height:100%;
 				width:20%;
 				border:1px solid black;
+				text align:center;
 			}
 		</style>
 	</head>
@@ -30,7 +31,7 @@
 		<div class="basePanel" id="base"></div>
 		<script>
 			var base=document.getElementById("base");
-			var template=`<div style="">i</div>`;
+			var template=`<div class="tempDiv">i</div>`;
 			for(var i=0;i<5;i++){
 				base.innerHTML+=template;
 			}
