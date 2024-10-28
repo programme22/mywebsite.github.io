@@ -34,7 +34,7 @@
 	 var ar=document.getElementById("ar");
 	 var btn=document.getElementById("btn");
 	 var p=document.getElementById("p");
-	function toBinary(n){
+	function toBinary(){
 	  var bin=0;
 	  var rem=0;
 	  var i=1;
@@ -46,6 +46,7 @@
 	  }
 	  alert(n);
 	}
+	btn.addEventListener("click",toBinary);
     </script>
 </body>
 </html>
