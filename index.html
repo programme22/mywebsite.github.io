@@ -31,13 +31,14 @@
 		</div>
 	</div>
     <script>
-	var ar=document.getElementById("ar").value;
-	var btn=document.getElementById("btn");
-	var p=document.getElementById("p");
-	var bin=0;
-	var rem=0;
-	var i=1;
+	 var ar=document.getElementById("ar");
+	 var btn=document.getElementById("btn");
+	 var p=document.getElementById("p");
 	function toBinary(n){
+	 
+	  var bin=0;
+	  var rem=0;
+	  var i=1;
 	  while(n!=0){
 	    rem=n%2;
 	    n=n/2;
