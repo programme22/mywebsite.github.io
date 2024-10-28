@@ -25,15 +25,25 @@
 	<div id="container">
 		<div id="form">
 		   <input type="text" name="ar" placeholder="Δώσε αριθμό">
+		   <button name="btn" id="btn" >click</button>
+		   <br>
+		   <p id="p"></p>	
 		</div>
 	</div>
     <script>
 	var ar=document.getElementById("ar").value;
+	var btn=document.getElementById("btn");
+	btn.addEventListener("click",toBinary(ar));
+	var p=document.getElementById("p");
 	function toBinary(n){
 	  var div=n;
 	  while(div!=0){
-	    var bin+=n%2;
+	    var bin+=div%2;
+		  if(div==0){
+		    break;
+		  }
 	  }
+	  p.innerHTML=bin;
 	}
     </script>
 </body>
