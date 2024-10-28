@@ -33,7 +33,6 @@
     <script>
 	var ar=document.getElementById("ar").value;
 	var btn=document.getElementById("btn");
-	btn.addEventListener("click",toBinary(ar));
 	var p=document.getElementById("p");
 	var bin=0;
 	var rem=0;
@@ -45,9 +44,10 @@
 	    bin=bin+rem*i;
 	    i=i*10;
 	  }
-		alert(bin);
+	  alert(bin);
 	 // p.innerHTML=bin;
 	}
+	btn.addEventListener("click",toBinary(ar));
     </script>
 </body>
 </html>
