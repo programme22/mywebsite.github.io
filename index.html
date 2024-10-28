@@ -35,16 +35,17 @@
 	var btn=document.getElementById("btn");
 	btn.addEventListener("click",toBinary(ar));
 	var p=document.getElementById("p");
-	var bin;
+	var bin=0;
+	var rem=0;
+	var i=1;
 	function toBinary(n){
-	  var div=n;
-	  while(div!=0){
-	    bin=div%2;
-		  if(div==0){
-		    break;
-		  }
+	  while(n>=0){
+	    rem=n%2;
+	    n=n/2;
+	    bin=bin+rem*i;
+	    i=i*10;
 	  }
-		alert(div);
+		alert(bin);
 	 // p.innerHTML=bin;
 	}
     </script>
