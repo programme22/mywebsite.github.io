@@ -1,0 +1,7 @@
+{
+  "greetings": ["hello", "hi", "hey", "good morning", "good afternoon"],
+  "responses": {
+    "greetings": "Hello! How can I assist you today?",
+    "fallback": "Sorry, I don't understand that."
+  }
+}
