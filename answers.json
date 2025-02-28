@@ -1,6 +1,6 @@
 {
   "greetings": ["hello", "hi", "hey", "good morning", "good afternoon"],
-  "questions":["calculate"]
+  "questions":"calculate"
   "responses": {
     "greetings": "Hello! How can I assist you today?",
     "math":"the result is"
