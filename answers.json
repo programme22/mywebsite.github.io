@@ -3,7 +3,7 @@
   "questions":"calculate",
   "responses": {
     "greetings": "Hello! How can I assist you today?",
-    "math":"the result is"
+    "math":"the result is",
     "fallback": "Sorry, I don't understand that."
   }
 }
