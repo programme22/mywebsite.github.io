@@ -1,9 +1,9 @@
 {
-  "greetings": ["hello", "hi", "hey", "good morning", "good afternoon"],
-  "questions": "calculate",
+  "greetings": ["γεια", "γεια σου","καλημέρα","καλημερα","καλησπέρα","καλησπερα","αντιο","αντίο"],
+  "questions": ["υπολόγισε","υπολογισε","πόσο κάνει","ποσο κανει"],
   "responses": {
-    "greetings": "Hello! How can I assist you today?",
-    "math": "the result is",
-    "fallback": "Sorry, I don't understand that."
+    "greetings": ["γεια!Πώς μπορώ να βοηθήσω;","καλημέρα!Πώς μπορώ να βοηθήσω;","καλησπέρα!Πώς μπορώ να βοηθήσω;"],
+    "math": ["κάνει","το αποτέλεσμα είναι"],
+    "fallback": "Λυπάμαι!Δεν καταλαβαίνω."
   }
 }
