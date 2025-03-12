@@ -1,6 +1,7 @@
 {
   "greetings": "γεια",
   "questions": "πόσο κάνει",
+  "operators": ["+","-","*","/","%"],
   "bye": "αντίο",
   "responses": {
     "greetings": "Γεια! Πώς μπορώ να βοηθήσω;",
