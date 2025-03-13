@@ -1,50 +1,135 @@
 <!DOCTYPE html>
-<html lang="el">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-	    body{
-		margin:0;
-		padding:0;
-	    }
-	    #container{
-		    width:100%;
-		    height:100vh;
-		    border:1px solid red;
-		    display:flex;
-		    align-items:center;
-	    }
-	    #form{
-		border:1px solid black;
-	    }
-    </style>
-</head>
-<body>
-	<div id="container">
-		<div id="form">
-		   <input type="text" id="ar" placeholder="Δώσε αριθμό">
-		   <button name="btn" id="btn">click</button>
-		   <br>
-		   <p id="p"></p>	
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Exams Assistant</title>
+		<!--<script src="<?=JSPATH?>functions.js"></script>-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+		<link rel="stylesheet" href="chatbot.css">
+	</head>
+	<body>
+		<div id="container">
+			<div id="res" class="background"></div>
+			<div id="inptDiv">
+				<input type="text" id="input" class="assets background">
+				<button id="btn" class="assets background">Send</button>
+			</div>
 		</div>
-	</div>
-    <script>
-	 
-	 var btn=document.getElementById("btn");
-	 var p=document.getElementById("p");
-	  var ar=document.getElementById("ar");
-	  var n=1;
-	  var bin=0;
-	  var rem=0;
-	  var i=1;
-	  while(n!=0){
-	    rem=n%2;
-	    n=n/2;
-	    bin=bin+rem;
-	    i=i*10;
-	  }
-    </script>
-</body>
+		<script>
+    var res = document.getElementById("res");
+    var btn = document.getElementById("btn");
+
+    async function chatbotResponse() {
+        var inputValue = document.getElementById("input").value.trim().toLowerCase();
+        var dbUrl = 'answers.json';
+
+        if (inputValue === "") {
+            alert("Invalid input");
+            return;
+        }
+
+        try {
+            let response = await fetch(dbUrl);
+            if (!response.ok) {
+                throw new Error("Invalid JSON");
+            }
+            let data = await response.json();
+
+            let answer = "";
+
+            if (data) {
+                // Ελέγχει αν το input είναι κάποιο από τα greetings
+                if (data.greetings.includes(inputValue)) {
+                    answer = data.responses.greetings;
+                }
+                // Ελέγχει αν το input είναι κάποιο από τα bye
+                else if (inputValue.includes(data.bye)) {
+                    answer = data.responses.bye;
+                }
+                // Ελέγχει αν το input είναι για υπολογισμό
+                else if (inputValue.includes(data.questions)) {
+                    let calculation = inputValue.replace(data.questions, "").trim();
+                    try {
+                        answer = data.responses.math + " " + eval(calculation);
+                    } catch (e) {
+                        answer = data.responses.mathfallback;
+                    }
+                }
+                // Ελέγχει αν περιέχει αριθμητικό τελεστή +, -, *, /, %
+                else {
+                    for (let i = 0; i < data.operators.length; i++) {
+                        if (inputValue.includes(data.operators[i])) {
+                            try {
+                                answer = data.responses.math + " " + eval(inputValue);
+                            } catch (e) {
+                                answer = data.responses.mathfallback;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+	
+            // Αν δεν βρέθηκε απάντηση, κάνε online αναζήτηση
+            if (!answer) {
+                answer = await searchOnline(inputValue);
+            }
+
+            // Προβολή απάντησης
+            showMessage(inputValue, answer);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            showMessage(inputValue, "⚠️ Error processing your request.");
+        }
+    }
+
+    function searchOnline(query) {
+    const searchUrl = "https://api.duckduckgo.com/?q=" + encodeURIComponent(query) + "&format=json";
+
+    return fetch(searchUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.AbstractText) {
+                return "⚠️ No online results found.";
+            }
+
+            return "🔍 **Online Search Results:**<br>"+data.AbstractText+" <br><a href='"+data.AbstractURL+"' target='_blank'>More Info</a>";
+        })
+        .catch(error => {
+            console.error("❌ Search error:", error);
+            return "⚠️ Online search failed.";
+        });
+}
+
+
+    function showMessage(userInput, botResponse) {
+        var userMsg = document.createElement("p");
+        var botMsg = document.createElement("p");
+        var msgDiv = document.createElement("div");
+        msgDiv.classList.add("msgDiv");
+
+        userMsg.innerHTML = userInput;
+        userMsg.classList.add("usrMsg");
+        msgDiv.appendChild(userMsg);
+
+        botMsg.innerHTML = botResponse;
+        botMsg.classList.add("botMsg");
+        msgDiv.appendChild(botMsg);
+
+        res.appendChild(msgDiv);
+        document.getElementById("input").value = ""; // Καθαρίζουμε το input
+    }
+
+    btn.addEventListener("click", chatbotResponse);
+    // Άκου για το γεγονός 'enter' στο πεδίο εισαγωγής
+		var input=document.getElementById("input");
+		input.addEventListener('keypress', function(event) {
+			// Αν ο χρήστης πατήσει το πλήκτρο Enter (κωδικός 13)
+			if (event.keyCode === 13) {
+				event.preventDefault(); // Αποτρέπουμε την προεπιλεγμένη συμπεριφορά του Enter (όπως το submit της φόρμας)
+				btn.click(); // Ενεργοποιούμε το click του κουμπιού, σαν να το πάτησε ο χρήστης
+			}
+		});
+		</script>
+	</body>
 </html>
