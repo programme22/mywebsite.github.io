@@ -127,7 +127,7 @@
 	        res.appendChild(msgDiv);
 	        document.getElementById("input").value = ""; // Καθαρίζουμε το input
 	    }
-	    function getWeather(city){
+	   async function getWeather(city){
 	    try {
 	   	var res=await fetch("https://wttr.in/"+city+"?format=j1");
 		let data = await response.json();
