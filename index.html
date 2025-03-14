@@ -31,9 +31,7 @@
 	                throw new Error("Invalid JSON");
 	            }
 	            let data = await response.json();
-	
 	            let answer = "";
-	
 	            if (data) {
 	                // Ελέγχει αν το input είναι κάποιο από τα greetings
 	                if (data.greetings.includes(inputValue)) {
@@ -127,16 +125,20 @@
 	        res.appendChild(msgDiv);
 	        document.getElementById("input").value = ""; // Καθαρίζουμε το input
 	    }
-	   async function getWeather(city){
-		    try {
-		   	var res=await fetch("https://wttr.in/"+city+"?format=j1");
-			let data = await response.json();
-		        let weather = data.current_condition[0];
-			return "Ο καιρός θα είναι:"+weather.weatherDesc[0].value+weather.temp_C+"°C";
+	   async function getWeather(city) {
+	            try {
+	                var res = await fetch("https://wttr.in/" + city + "?format=j1");
+	                let data = await res.json();
+	                let weather = data.current_condition[0];
+	                if (weather && weather.weatherDesc && weather.weatherDesc[0] && weather.temp_C !== undefined) {
+	                    return "Ο καιρός θα είναι: " + weather.weatherDesc[0].value + " " + weather.temp_C + "°C";
+	                } else {
+	                    return "⚠️ Δεν βρέθηκαν δεδομένα καιρού.";
+	                }
 	            } catch {
 	                return "⚠️ Πρόβλημα με την πρόβλεψη καιρού.";
 	            }
-	}
+	        }
 	    btn.addEventListener("click", chatbotResponse);
 	    // Άκου για το γεγονός 'enter' στο πεδίο εισαγωγής
 		var input=document.getElementById("input");
