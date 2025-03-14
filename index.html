@@ -21,12 +21,10 @@
 	    async function chatbotResponse() {
 	        var inputValue = document.getElementById("input").value.trim().toLowerCase();
 	        var dbUrl = 'answers.json';
-	
 	        if (inputValue === "") {
 	            alert("Invalid input");
 	            return;
 	        }
-	
 	        try {
 	            let response = await fetch(dbUrl);
 	            if (!response.ok) {
