@@ -45,9 +45,13 @@
 	                }
 			// Ελέγχει αν το input είναι ξεκινάει από το wheather
 	                else if (inputValue.includes(data.weather)) {
-				for(var i=0;i<)
-				if (inputValue.includes("")
-	                    answer = data.responses.weather;
+				for(var i=0;i<data.poleis.length;i++){
+					if (inputValue.includes(data.poleis[i]){
+		                    		polh=data.poleis[i];
+						break;
+					}
+				}
+				answer=getWeather(polh);
 	                }
 	                // Ελέγχει αν το input είναι για υπολογισμό
 	                else if (inputValue.includes(data.questions)) {
@@ -102,7 +106,7 @@
 	            console.error("❌ Search error:", error);
 	            return "⚠️ Online search failed.";
 	        });
-	}
+	   }
 
 
 	    function showMessage(userInput, botResponse) {
@@ -122,17 +126,24 @@
 	        res.appendChild(msgDiv);
 	        document.getElementById("input").value = ""; // Καθαρίζουμε το input
 	    }
-	
+	    function getWeather(city){
+	   	fetch("https://wttr.in/"+city+"?format=j1")
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+			return data;
+		});
+	   }
 	    btn.addEventListener("click", chatbotResponse);
 	    // Άκου για το γεγονός 'enter' στο πεδίο εισαγωγής
-			var input=document.getElementById("input");
-			input.addEventListener('keypress', function(event) {
-				// Αν ο χρήστης πατήσει το πλήκτρο Enter (κωδικός 13)
-				if (event.keyCode === 13) {
-					event.preventDefault(); // Αποτρέπουμε την προεπιλεγμένη συμπεριφορά του Enter (όπως το submit της φόρμας)
-					btn.click(); // Ενεργοποιούμε το click του κουμπιού, σαν να το πάτησε ο χρήστης
-				}
-			});
+		var input=document.getElementById("input");
+		input.addEventListener('keypress', function(event) {
+			// Αν ο χρήστης πατήσει το πλήκτρο Enter (κωδικός 13)
+			if (event.keyCode === 13) {
+				event.preventDefault(); // Αποτρέπουμε την προεπιλεγμένη συμπεριφορά του Enter (όπως το submit της φόρμας)
+				btn.click(); // Ενεργοποιούμε το click του κουμπιού, σαν να το πάτησε ο χρήστης
+			}
+		});
 		</script>
 	</body>
 </html>
