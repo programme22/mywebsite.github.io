@@ -128,15 +128,15 @@
 	        document.getElementById("input").value = ""; // Καθαρίζουμε το input
 	    }
 	   async function getWeather(city){
-	    try {
-	   	var res=await fetch("https://wttr.in/"+city+"?format=j1");
-		let data = await response.json();
-	        let weather = data.current_condition[0];
-		return "Ο καιρός θα είναι:"+weather.weatherDesc[0].value+weather.temp_C+"°C";
-            } catch {
-                return "⚠️ Πρόβλημα με την πρόβλεψη καιρού.";
-            }
-		});
+		    try {
+		   	var res=await fetch("https://wttr.in/"+city+"?format=j1");
+			let data = await response.json();
+		        let weather = data.current_condition[0];
+			return "Ο καιρός θα είναι:"+weather.weatherDesc[0].value+weather.temp_C+"°C";
+	            } catch {
+	                return "⚠️ Πρόβλημα με την πρόβλεψη καιρού.";
+	            }
+	}
 		
 	   }
 	    btn.addEventListener("click", chatbotResponse);
