@@ -4,17 +4,20 @@
 		<meta charset="utf-8">
 		<title>Chatbot</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-		<link rel="stylesheet" href="chatbot.css">
+		<link rel="stylesheet" href="menu.css">
 	</head>
 	<body>
 		<div id="container">
 			<div id="res" class="background"></div>
 			<div id="inptDiv">
 				<input type="text" id="input" class="assets background">
-				<button id="btn" class="assets background">Send</button>
+				<button id="btn" class="assets background" onclick="bot()">Send</button>
 			</div>
 		</div>
 		<script>
+			function bot(){
+				window.location.href="./chatbot";
+			}
 	    var res = document.getElementById("res");
 	    var btn = document.getElementById("btn");
 	
