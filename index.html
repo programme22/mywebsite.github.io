@@ -14,7 +14,7 @@
         for (var i = 0; i < pageList.length; i++) {
             var button = document.createElement("button");
             button.id = "btn-" + i;
-            button.textContent = "Go to " + pageList[i]; // Add button text
+            button.textContent = "Go to Chatbot"; // Add button text
             button.setAttribute("data-page", pageList[i]); // Store the page path in a data attribute
             button.onclick = function() {
                 var page = this.getAttribute("data-page");
