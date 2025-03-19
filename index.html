@@ -12,15 +12,12 @@
         var pageList = ["./chatbot"]; // Relative path to the chatbot folder
         var container = document.getElementById("container");
         for (var i = 0; i < pageList.length; i++) {
-            var button = document.createElement("button");
-            button.id = "btn-" + i;
-            button.textContent = "Go to Chatbot"; // Add button text
-            button.setAttribute("data-page", pageList[i]); // Store the page path in a data attribute
-            button.onclick = function() {
-                var page = this.getAttribute("data-page");
-                window.location.href = page;
-            };
-            container.appendChild(button);
+            var link = document.createElement("a");
+            link.id = "link-" + i;
+            link.textContent = "Go to Chatbot"; // Add link text
+            link.href = pageList[i]; // Set the href attribute to the page path
+            link.classList.add("nav-link"); // Add a class for styling if needed
+            container.appendChild(link);
         }
     </script>
 </body>
