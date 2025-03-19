@@ -7,151 +7,19 @@
 		<link rel="stylesheet" href="menu.css">
 	</head>
 	<body>
-		<div id="container">
-			<div id="res" class="background"></div>
-			<div id="inptDiv">
-				<input type="text" id="input" class="assets background">
-				<button id="btn" class="assets background" onclick="bot()">Send</button>
-			</div>
-		</div>
+		<div id="container"></div>
 		<script>
-			function bot(){
-				window.location.href="../chatbot";
+			var pageList=["../chatbot"];
+			var container=document.getElementById("container");
+			for(var i=0;i<pageList.length;i++){
+			   var button=document.createElement("button");
+			   button.id="btn-"+i;
+			   button.onclick=link(pageList[i]);
+			   container.appendChild(button);
 			}
-	  /*  var res = document.getElementById("res");
-	    var btn = document.getElementById("btn");
-	
-	    async function chatbotResponse() {
-	        var inputValue = document.getElementById("input").value.trim().toLowerCase();
-	        var dbUrl = 'answers.json';
-	        if (inputValue === "") {
-	            alert("Invalid input");
-	            return;
-	        }
-	        try {
-	            let response = await fetch(dbUrl);
-	            if (!response.ok) {
-	                throw new Error("Invalid JSON");
-	            }
-	            let data = await response.json();
-	            let answer = "";
-	            if (data) {
-	                // Ελέγχει αν το input είναι κάποιο από τα greetings
-	                if (data.greetings.includes(inputValue)) {
-	                    answer = data.responses.greetings;
-	                }
-	                // Ελέγχει αν το input είναι κάποιο από τα bye
-	                else if (inputValue.includes(data.bye)) {
-	                    answer = data.responses.bye;
-	                }
-			// Ελέγχει αν το input είναι ξεκινάει από το wheather
-	                else if (inputValue.includes(data.weather)) {
-				for (var i=0;i<data.poleis.length;i++){
-					if (inputValue.includes(data.poleis[i])){
-		                    		polh=data.poleis[i];
-						console.log(polh);
-						break;
-					}
-				}
-				 answer = await getWeather(polh);
-	                }
-	                // Ελέγχει αν το input είναι για υπολογισμό
-	                else if (inputValue.includes(data.questions)) {
-	                    let calculation = inputValue.replace(data.questions, "").trim();
-	                    try {
-	                        answer = data.responses.math + " " + eval(calculation);
-	                    } catch (e) {
-	                        answer = data.responses.mathfallback;
-	                    }
-	                }
-	                // Ελέγχει αν περιέχει αριθμητικό τελεστή +, -, *, /, %
-	                else {
-	                    for (let i = 0; i < data.operators.length; i++) {
-	                        if (inputValue.includes(data.operators[i])) {
-	                            try {
-	                                answer = data.responses.math + " " + eval(inputValue);
-	                            } catch (e) {
-	                                answer = data.responses.mathfallback;
-	                            }
-	                            break;
-	                        }
-	                    }
-	                }
-	            }
-		
-	            // Αν δεν βρέθηκε απάντηση, κάνε online αναζήτηση
-	            if (!answer) {
-	                answer = await searchOnline(inputValue);
-	            }
-	
-	            // Προβολή απάντησης
-	            showMessage(inputValue, answer);
-	        } catch (error) {
-	            console.error("Error fetching data:", error);
-	            showMessage(inputValue, "⚠️ Error processing your request.");
-	        }
-	    }
-	
-	    function searchOnline(query) {
-	    const searchUrl = "https://api.duckduckgo.com/?q=" + encodeURIComponent(query) + "&format=json";
-	
-	    return fetch(searchUrl)
-	        .then(response => response.json())
-	        .then(data => {
-	            if (!data.AbstractText) {
-	                return "⚠️ No online results found.";
-	            }
-	
-	            return "🔍 **Online Search Results:**<br>"+data.AbstractText+" <br><a href='"+data.AbstractURL+"' target='_blank'>More Info</a>";
-	        })
-	        .catch(error => {
-	            console.error("❌ Search error:", error);
-	            return "⚠️ Online search failed.";
-	        });
-	   }
-
-
-	    function showMessage(userInput, botResponse) {
-	        var userMsg = document.createElement("p");
-	        var botMsg = document.createElement("p");
-	        var msgDiv = document.createElement("div");
-	        msgDiv.classList.add("msgDiv");
-	
-	        userMsg.innerHTML = userInput;
-	        userMsg.classList.add("usrMsg");
-	        msgDiv.appendChild(userMsg);
-	
-	        botMsg.innerHTML = botResponse;
-	        botMsg.classList.add("botMsg");
-	        msgDiv.appendChild(botMsg);
-	
-	        res.appendChild(msgDiv);
-	        document.getElementById("input").value = ""; // Καθαρίζουμε το input
-	    }
-	   async function getWeather(city) {
-	            try {
-	                var res = await fetch("https://wttr.in/" + city + "?format=j1");
-	                let data = await res.json();
-	                let weather = data.current_condition[0];
-	                if (weather && weather.weatherDesc && weather.weatherDesc[0] && weather.temp_C !== undefined) {
-	                    return "Ο καιρός θα είναι: " + weather.weatherDesc[0].value + " " + weather.temp_C + "°C";
-	                } else {
-	                    return "⚠️ Δεν βρέθηκαν δεδομένα καιρού.";
-	                }
-	            } catch {
-	                return "⚠️ Πρόβλημα με την πρόβλεψη καιρού.";
-	            }
-	        }
-	    btn.addEventListener("click", chatbotResponse);
-	    // Άκου για το γεγονός 'enter' στο πεδίο εισαγωγής
-		var input=document.getElementById("input");
-		input.addEventListener('keypress', function(event) {
-			// Αν ο χρήστης πατήσει το πλήκτρο Enter (κωδικός 13)
-			if (event.keyCode === 13) {
-				event.preventDefault(); // Αποτρέπουμε την προεπιλεγμένη συμπεριφορά του Enter (όπως το submit της φόρμας)
-				btn.click(); // Ενεργοποιούμε το click του κουμπιού, σαν να το πάτησε ο χρήστης
+			function link(page){
+				window.location.href=page;
 			}
-		});*/
 		</script>
 	</body>
 </html>
