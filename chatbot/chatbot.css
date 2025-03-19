@@ -1,0 +1,87 @@
+
+*{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+#navbar{
+	width:100%;
+	height:20%;
+	background:blue;
+	display:flex;
+	flex-direction:row;
+}
+#container{
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100vh;
+	background:#c7ba6f94;
+	display:flex;
+	flex-direction:column;
+}
+#res{
+	width:98vw;
+	height:80vh;
+	border:1px solid transparent;
+	border-radius:10px;
+	overflow-y:auto;
+	margin:10px 10px 10px 10px;
+	background:#fff;
+}
+#inptDiv{
+	width:100vw;
+	height:20vh;
+	border:1px solid transparent;
+	display:flex;
+	justify-content:center;
+}
+.assets{
+	margin-top:1%;
+	border:none;
+	outline:none;
+}
+#input{
+	height:50%;
+	width:80%;
+	background:#fcfcfa;
+	border-radius:20px 0px 0px 20px;
+}
+#btn{
+	height:50.5%;
+	width:10%;
+	border-radius:0px 20px 20px 0px;
+	background:blue;
+	color:#fff;
+}
+.msgDiv {
+    display: flex;
+    flex-direction: column; /* Τα μηνύματα θα εμφανίζονται το ένα κάτω από το άλλο */
+    align-items: flex-start; /* Τα μηνύματα του χρήστη θα είναι αριστερά */
+    width: 100%;
+    margin-bottom: 10px; /* Απόσταση μεταξύ των μηνυμάτων */	
+}
+
+.usrMsg, .botMsg {
+    max-width: 60%; /* Για να μην είναι τεράστιες οι φούσκες */
+    padding: 10px 15px;
+    border-radius: 20px; /* Κάνει τις γωνίες πιο στρογγυλεμένες */
+    word-wrap: break-word; /* Σπάει τις μεγάλες λέξεις */
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Προσθέτει μια σκιά */
+}
+
+.usrMsg {
+    background: #0078ff; /* Μπλε για τον χρήστη */
+    color: white;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px; /* Λίγο πιο επίπεδη η κάτω αριστερή γωνία */
+	margin-left:20px;
+}
+
+.botMsg {
+    background: #4CAF50; /* Πράσινο για το bot */
+    color: black;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px; /* Λίγο πιο επίπεδη η κάτω δεξιά γωνία */
+	margin-right:20px;
+}
